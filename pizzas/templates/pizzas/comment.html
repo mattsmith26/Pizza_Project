@@ -1,0 +1,16 @@
+{% extends "pizzas/base.html" %}
+{% load static %}
+
+{% block content %} 
+<link rel="stylesheet" href="{% static 'format.css' %}"> 
+<p><a href="{% url 'pizzas:pizza' pizza_name.id %}"> {{ p }} </a></p>
+
+<h2><p>Pizza Name: {{ pizza_name.pizza_name }} </p></h2>
+<form action="{% url 'pizzas:comments' pizza_name.id %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button name="submit">Submit Comment</button>
+</form>
+
+{% endblock content %}

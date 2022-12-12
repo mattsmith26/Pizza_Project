@@ -1,0 +1,41 @@
+{% extends "pizzas/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'format.css' %}"> 
+
+<p style="font-size:30px"> Pizza: {{ pizza_name }} </p> 
+
+{% for i in image %}
+<div class="'col-md-4">
+
+</div>
+{% empty %}
+<p> No image yet </p>
+{% endfor %}
+
+<form method ='POST'>
+    <p style="font-size:25px"> List of Toppings in this pizza: </p>   
+    <ul> 
+        {% for t in topping %}
+        <li> {{ t.topping }} </li>
+
+        {% empty %}
+        <li> no toppings listed for this pizza </li>
+        {% endfor %}
+        
+    </ul>
+    <p style="font-size:25px"> Comments: </p>
+    <ul>
+        {% for c in comment %}
+        <li>{{ c.text }}</li>
+
+        {% empty %} 
+        <p> No comments </p>
+        {% endfor %}
+        
+    </ul>
+    <p><a href="{% url 'pizzas:comment' pizza_name.id %}"> LEAVE A COMMENT!</a></p>
+</form>
+
+{% endblock content %}
